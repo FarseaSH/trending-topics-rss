@@ -23,20 +23,21 @@ for node in container_lst[:40]:
 
 
     a = f'<a href="{ url }">' + title.text + "----" + popularity.text + r'</a>'  # link
-    weibo_content += f"<p>{i}  {a}</p>  + \n"
+    weibo_content += f"<p>{i}  {a}</p>\n"
     i += 1
 
 
+# todo polish this part
 rss_output =f"""<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>
     <title>热榜</title>
-    <link>https://www.w3schools.com</link>
+    <link>https://s.weibo.com/top/summary</link>
     <description><![CDATA[热榜RSS解决方案]]></description>
 
 <item>
     <title>微博热榜 - {datetime.now().strftime(r"%H:%M %a %Y-%m-%d")}</title>
-    <link>https://www.w3schools.com</link>
+    <link>https://s.weibo.com/top/summary</link>
     <description><![CDATA[{weibo_content}]]></description>
 </item>
 </channel>
@@ -45,5 +46,5 @@ rss_output =f"""<?xml version="1.0" encoding="UTF-8" ?>
 
 # save the output
 Path('./public').mkdir(parents=True, exist_ok=True)
-with open(r'./public/weibo.xml', mode='w', encoding="utf-8") as f:
+with open(r'./public/index.xml', mode='w', encoding="utf-8") as f:
     f.write(rss_output)
