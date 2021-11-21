@@ -45,5 +45,5 @@ rss_output =f"""<?xml version="1.0" encoding="UTF-8" ?>
 
 # save the output
 Path('./public').mkdir(parents=True, exist_ok=True)
-with open(r'./public/dongqiudi.xml', mode='w', encoding="utf-8") as f:
+with open(r'./public/weibo.xml', mode='w', encoding="utf-8") as f:
     f.write(rss_output)
