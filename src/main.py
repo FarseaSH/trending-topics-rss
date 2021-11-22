@@ -1,5 +1,5 @@
 # %%
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import requests
@@ -28,15 +28,16 @@ for node in container_lst[:40]:
 
 
 # todo polish this part
+current_beijing_time = datetime.now() + timedelta(hours=8.0)
+
 rss_output =f"""<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>
     <title>热榜</title>
-    <link>https://s.weibo.com/top/summary</link>
+    <link>https://github.com/FarseaSH/trending-topics-rss/blob/gh-pages/index.xml</link>
     <description><![CDATA[热榜RSS解决方案]]></description>
-
 <item>
-    <title>微博热榜 - {datetime.now().strftime(r"%H:%M %a %Y-%m-%d")}</title>
+    <title>微博热榜 - {current_beijing_time.strftime(r"%H:%M %a %Y-%m-%d")}</title>
     <link>https://s.weibo.com/top/summary</link>
     <description><![CDATA[{weibo_content}]]></description>
 </item>
