@@ -1,5 +1,6 @@
 # %%
 from datetime import datetime, timedelta
+import time
 from pathlib import Path
 import configparser
 
@@ -18,6 +19,7 @@ class ContentParser():
         return rank-item in a list
         """
 
+        time.sleep(1.0)
         r = requests.get(
             r"https://tophub.today/n/{rebang_id}".format(rebang_id=self.rebang_id),
             headers={"User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit"}
@@ -33,13 +35,18 @@ class ContentParser():
 
         content = ""
         i = 1
-        for node in self._parseRawPage()[:40]:
+        for node in self._parseRawPage()[:30]:
+            print(i, self.rebang_id)
             # query
-            url = node['href']
+            url = requests.get(
+                r"https://tophub.today" +  node['href'],
+                headers={"User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit"}
+            ).url
+            time.sleep(1.0)
             title = node.find_next(class_='s-title')
             popularity = node.find_next(class_='s-tie-count')
 
-            a = f'<a href="{r"https://tophub.today" +  url }">' + title.text + "----" + popularity.text + r'</a>'  # link
+            a = f'<a href="{url}">' + title.text + "----" + popularity.text + r'</a>'  # link
             content += f"<p>{i}  {a}</p>\n"
             i += 1
 
