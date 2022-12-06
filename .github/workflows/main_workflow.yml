@@ -6,12 +6,12 @@ on:
 
 jobs:
   run-python-scripts:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.8.1'
+          python-version: '3.8.0'
       - run: pip install requests
       - run: pip install beautifulsoup4
       - run: python src/main.py
