@@ -2,7 +2,7 @@ name: Update trending topic
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '*/15 0-16 * * *'
+    - cron:  '*/30 0-16 * * *'
 
 jobs:
   run-python-scripts:
