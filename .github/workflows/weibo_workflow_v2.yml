@@ -1,0 +1,25 @@
+name: Update trending topic
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '* */2 * * *'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  run-python-scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+      - run: pip install feedparser requests pytz
+      - run: python src/new_main.py
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './public'
